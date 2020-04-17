@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.statusapp.MainActivity">
+        <activity android:name=".NodeActivity"></activity>
+        <activity android:name=".ServiceActivity" />
+        <activity android:name=".NodesActivity" />
+        <activity android:name=".ServicesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
