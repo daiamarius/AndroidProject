@@ -23,7 +23,7 @@
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:id="@+id/tags"
+            android:id="@+id/userTags"
             android:text="Tags"
             android:textSize="22sp"
             android:layout_toEndOf="@+id/name"
@@ -36,7 +36,7 @@
             android:id="@+id/healthchecks"
             android:text="Tags"
             android:textSize="22sp"
-            android:layout_toEndOf="@+id/tags"
+            android:layout_toEndOf="@+id/userTags"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp">
         </TextView>

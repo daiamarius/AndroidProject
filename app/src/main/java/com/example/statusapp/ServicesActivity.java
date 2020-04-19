@@ -1,13 +1,22 @@
 package com.example.statusapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.example.statusapp.model.Repository;
 import com.example.statusapp.model.service.Service;
+import com.example.statusapp.model.service.ServiceViewModel;
 import com.example.statusapp.model.service.Services;
 import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,13 +32,35 @@ public class ServicesActivity extends AppCompatActivity{
 
     private ServicesAdapter adapter;
     private RecyclerView recyclerView;
+    private Repository repository;
 
+
+    private ServiceViewModel serviceViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initRecyclerView();
+
+        repository = new Repository(this.getApplication());
+
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        adapter = new ServicesAdapter(this,services);
+        recyclerView.setAdapter(adapter);
+
+        serviceViewModel = ViewModelProviders.of(this).get(ServiceViewModel.class);
+        serviceViewModel.getAllServices().observe(this, new Observer<List<Service>>() {
+            @Override
+            public void onChanged(List<Service> services) {
+                // update recyclerview
+                adapter.setServices(services);
+                Toast.makeText(getApplicationContext(),"Observer on changed",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         getServices();
     }
 
@@ -55,7 +86,8 @@ public class ServicesActivity extends AppCompatActivity{
                     services.clear();
                     services.addAll(s.getServices());
                     Log.d(TAG, "onResponse: Services" + services.toString());
-                    refreshRecyclerView();
+                    repository.insertMultipleServices(services);
+                    //refreshRecyclerView();
                 }
             }
 
@@ -78,7 +110,7 @@ public class ServicesActivity extends AppCompatActivity{
     }
 
     private void refreshRecyclerView(){
-        Log.d(TAG, "refreshRecyclerView: servicel:"+services.toString());
+        Log.d(TAG, "refreshRecyclerView: services:"+services.toString());
         adapter.notifyDataSetChanged();
     }
 }

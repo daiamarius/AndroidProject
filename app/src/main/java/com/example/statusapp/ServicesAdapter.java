@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.statusapp.model.service.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder>{
 
     private final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<Service> services;
+    private List<Service> services;
 
     private Context context;
 
-    public ServicesAdapter(Context context, ArrayList<Service> services) {
+    public ServicesAdapter(Context context, List<Service> services) {
         this.services = services;
         this.context = context;
     }
@@ -41,8 +41,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         Log.d(TAG, "onBindViewHolder: called");
 
         holder.name.setText(services.get(position).getName());
-        holder.tags.setText(services.get(position).getTags().toString());
-        holder.healthchecks.setText(services.get(position).getChecks().toString());
+        //holder.tags.setText(services.get(position).getUserTags().toString());
+        //holder.healthchecks.setText(services.get(position).getChecks().toString());
 
     }
 
@@ -51,16 +51,20 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         return services.size();
     }
 
+    public void setServices(List<Service> services){
+        this.services = services;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView tags;
         TextView healthchecks;
-        RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             name = itemView.findViewById(R.id.name);
-            tags = itemView.findViewById(R.id.tags);
+            tags = itemView.findViewById(R.id.userTags);
             healthchecks = itemView.findViewById(R.id.healthchecks);
         }
     }

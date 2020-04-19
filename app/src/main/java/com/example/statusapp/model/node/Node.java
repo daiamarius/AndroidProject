@@ -1,14 +1,28 @@
 package com.example.statusapp.model.node;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.example.statusapp.model.Healthchecks;
-import com.example.statusapp.model.Tag;
+import com.example.statusapp.model.service.Service;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "nodes",
+        foreignKeys = @ForeignKey(
+        entity = Service.class,
+        parentColumns = "serviceId",
+        childColumns = "serviceCreatorId",
+        onDelete = CASCADE))
 public class Node {
 
+    @Ignore
     @SerializedName("healthchecks")
     @Expose
     private Healthchecks healthchecks;
@@ -18,9 +32,10 @@ public class Node {
     @Expose
     private String host;
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
-    private int id;
+    private int nodeId;
 
     @SerializedName("registered")
     @Expose
@@ -28,7 +43,9 @@ public class Node {
 
     @SerializedName("tags")
     @Expose
-    private ArrayList<Tag> tags;
+    private ArrayList<TechTag> techTags;
+
+    private int serviceCreatorId;
 
     public Healthchecks getHealthchecks() {
         return healthchecks;
@@ -46,12 +63,12 @@ public class Node {
         this.host = host;
     }
 
-    public int getId() {
-        return id;
+    public int getNodeId() {
+        return nodeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNodeId(int nodeId) {
+        this.nodeId = nodeId;
     }
 
     public String getRegistered() {
@@ -62,12 +79,12 @@ public class Node {
         this.registered = registered;
     }
 
-    public ArrayList<Tag> getTags() {
-        return tags;
+    public ArrayList<TechTag> getTechTags() {
+        return techTags;
     }
 
-    public void setTags(ArrayList<Tag> tags) {
-        this.tags = tags;
+    public void setTechTags(ArrayList<TechTag> techTags) {
+        this.techTags = techTags;
     }
 
     @Override
@@ -75,9 +92,9 @@ public class Node {
         return "Node{" +
                 "healthchecks=" + healthchecks +
                 ", host='" + host + '\'' +
-                ", id=" + id +
+                ", nodeId=" + nodeId +
                 ", registered='" + registered + '\'' +
-                ", tags=" + tags +
+                ", techTags=" + techTags +
                 '}';
     }
 }

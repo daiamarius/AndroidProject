@@ -1,16 +1,21 @@
-package com.example.statusapp.model;
+package com.example.statusapp.model.node;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Tag {
+@Entity(tableName = "techtags")
+public class TechTag {
     @SerializedName("name")
     @Expose
     private String name;
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
-    private int id;
+    private int techTagId;
 
     public String getName() {
         return name;
@@ -20,19 +25,19 @@ public class Tag {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getTechTagId() {
+        return techTagId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTechTagId(int techTagId) {
+        this.techTagId = techTagId;
     }
 
     @Override
     public String toString() {
-        return "Tag{" +
+        return "TechTag{" +
                 "name='" + name + '\'' +
-                ", id=" + id +
+                ", techTagId=" + techTagId +
                 '}';
     }
 }
