@@ -1,4 +1,4 @@
-package com.example.statusapp;
+package com.example.statusapp.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,24 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.statusapp.model.service.Service;
+import com.example.statusapp.R;
+import com.example.statusapp.db.modelROOM.ServiceWithTags;
+import com.example.statusapp.modelAPI.service.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder>{
-
-    private final String TAG = "RecyclerViewAdapter";
-
-    private ArrayList<Service> services;
-
+    private final String TAG = "ServicesAdapter";
+    private List<ServiceWithTags> services;
     private Context context;
 
-    public ServicesAdapter(Context context, ArrayList<Service> services) {
+    public ServicesAdapter(Context context,List<ServiceWithTags> services) {
         this.services = services;
         this.context = context;
     }
@@ -40,10 +39,10 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        holder.name.setText(services.get(position).getName());
+        holder.name.setText(services.get(position).getService().getName());
         holder.tags.setText(services.get(position).getTags().toString());
-        holder.healthchecks.setText(services.get(position).getChecks().toString());
-
+        holder.healthchecks.setText(String.
+                valueOf(services.get(position).getService().getPassing()));
     }
 
     @Override
@@ -51,11 +50,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         return services.size();
     }
 
+    public void setServices(List<ServiceWithTags> services){
+        this.services = services;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView tags;
         TextView healthchecks;
-        RelativeLayout parentLayout;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);

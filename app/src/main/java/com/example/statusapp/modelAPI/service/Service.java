@@ -1,7 +1,8 @@
-package com.example.statusapp.model.service;
+package com.example.statusapp.modelAPI.service;
 
-import com.example.statusapp.model.Healthchecks;
-import com.example.statusapp.model.Tag;
+import com.example.statusapp.db.modelROOM.ServiceEntity;
+import com.example.statusapp.modelAPI.Healthchecks;
+import com.example.statusapp.modelAPI.Tag;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -65,5 +66,10 @@ public class Service {
                 ", name='" + name + '\'' +
                 ", tags=" + tags +
                 '}';
+    }
+
+    public ServiceEntity toEntity(){
+        return new ServiceEntity(this.id,this.name,this.checks.getPassing(),
+                this.checks.getCritical(),this.checks.getWarning());
     }
 }

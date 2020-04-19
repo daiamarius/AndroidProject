@@ -1,4 +1,4 @@
-package com.example.statusapp.model;
+package com.example.statusapp.modelAPI;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,14 +1,16 @@
-package com.example.statusapp;
+package com.example.statusapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ServiceActivity extends AppCompatActivity {
+import com.example.statusapp.R;
+
+public class NodesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_service);
+        setContentView(R.layout.activity_nodes);
     }
 }

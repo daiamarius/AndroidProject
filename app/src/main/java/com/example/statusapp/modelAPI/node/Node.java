@@ -1,7 +1,7 @@
-package com.example.statusapp.model.node;
+package com.example.statusapp.modelAPI.node;
 
-import com.example.statusapp.model.Healthchecks;
-import com.example.statusapp.model.Tag;
+import com.example.statusapp.modelAPI.Healthchecks;
+import com.example.statusapp.modelAPI.Tag;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

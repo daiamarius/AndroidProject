@@ -1,7 +1,7 @@
-package com.example.statusapp;
+package com.example.statusapp.modelAPI;
 
-import com.example.statusapp.model.node.Nodes;
-import com.example.statusapp.model.service.Services;
+import com.example.statusapp.modelAPI.node.NodeResponse;
+import com.example.statusapp.modelAPI.service.ServiceResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,9 +10,9 @@ import retrofit2.http.Headers;
 public interface StatusappAPI {
     @Headers("Content-Type: application/json")
     @GET("services")
-    Call<Services> getServices();
+    Call<ServiceResponse> getServices();
 
     @Headers("Content-Type: application/json")
     @GET("nodes")
-    Call<Nodes> getNodes();
+    Call<NodeResponse> getNodes();
 }

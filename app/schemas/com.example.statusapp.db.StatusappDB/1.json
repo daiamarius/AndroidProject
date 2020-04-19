@@ -1,0 +1,134 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "325dce4d2762df3d00f51925e766f1e7",
+    "entities": [
+      {
+        "tableName": "service",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`serviceId` INTEGER NOT NULL, `name` TEXT, `passing` INTEGER NOT NULL, `failing` INTEGER NOT NULL, `warning` INTEGER NOT NULL, PRIMARY KEY(`serviceId`))",
+        "fields": [
+          {
+            "fieldPath": "serviceId",
+            "columnName": "serviceId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "passing",
+            "columnName": "passing",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "failing",
+            "columnName": "failing",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "warning",
+            "columnName": "warning",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "serviceId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "usertag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userTagId` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`userTagId`))",
+        "fields": [
+          {
+            "fieldPath": "userTagId",
+            "columnName": "userTagId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "userTagId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "service_tag_join",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`serviceId` INTEGER NOT NULL, `userTagId` INTEGER NOT NULL, PRIMARY KEY(`serviceId`, `userTagId`), FOREIGN KEY(`serviceId`) REFERENCES `service`(`serviceId`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`userTagId`) REFERENCES `usertag`(`userTagId`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "serviceId",
+            "columnName": "serviceId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userTagId",
+            "columnName": "userTagId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "serviceId",
+            "userTagId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "service",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "serviceId"
+            ],
+            "referencedColumns": [
+              "serviceId"
+            ]
+          },
+          {
+            "table": "usertag",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "userTagId"
+            ],
+            "referencedColumns": [
+              "userTagId"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '325dce4d2762df3d00f51925e766f1e7')"
+    ]
+  }
+}

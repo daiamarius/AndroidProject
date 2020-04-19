@@ -1,8 +1,10 @@
-package com.example.statusapp;
+package com.example.statusapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.statusapp.R;
 
 public class NodeActivity extends AppCompatActivity {
 
