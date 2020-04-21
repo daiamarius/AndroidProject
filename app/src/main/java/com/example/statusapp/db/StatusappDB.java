@@ -9,11 +9,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.statusapp.db.modelROOM.ServiceEntity;
-import com.example.statusapp.db.modelROOM.ServiceTagCrossRef;
-import com.example.statusapp.db.modelROOM.UserTagEntity;
-import com.example.statusapp.modelAPI.Tag;
-import com.example.statusapp.modelAPI.service.Service;
+import com.example.statusapp.db.model.ServiceEntity;
+import com.example.statusapp.db.model.ServiceTagCrossRef;
+import com.example.statusapp.db.model.UserTagEntity;
+import com.example.statusapp.API.models.Tag;
+import com.example.statusapp.API.models.service.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +43,10 @@ public abstract class StatusappDB extends RoomDatabase {
         new InsertServicesWithTagsInDb(this.serviceDao()).execute(services);
     }
 
+    public void deleteAllServices(){
+        new DeleteAllServicesAsyncTask(this.serviceDao()).execute();
+    }
+
     private class InsertServicesWithTagsInDb extends AsyncTask<ArrayList<Service>,Void,Void>{
 
         private ServiceDao dao;
@@ -62,6 +66,23 @@ public abstract class StatusappDB extends RoomDatabase {
                     dao.insertServiceTagCrossRef(new ServiceTagCrossRef(s.getId(),t.getId()));
                 }
             }
+            return null;
+        }
+    }
+
+    private class DeleteAllServicesAsyncTask extends AsyncTask<Void,Void,Void>{
+
+        private ServiceDao dao;
+
+        public DeleteAllServicesAsyncTask(ServiceDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            dao.deleteAllServiceTagCrossRefs();
+            dao.deleteAllUserTags();
+            dao.deleteAllServices();
             return null;
         }
     }

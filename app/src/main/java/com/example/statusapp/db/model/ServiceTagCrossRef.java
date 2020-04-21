@@ -1,4 +1,4 @@
-package com.example.statusapp.db.modelROOM;
+package com.example.statusapp.db.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;

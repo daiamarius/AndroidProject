@@ -1,19 +1,19 @@
-package com.example.statusapp.modelAPI.node;
+package com.example.statusapp.API.models.service;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class NodeResponse {
+public class ServiceResponse {
 
     @SerializedName("message")
     @Expose
     private String message;
 
-    @SerializedName("nodes")
+    @SerializedName("services")
     @Expose
-    private ArrayList<Node> nodes;
+    private ArrayList<Service> services;
 
     public String getMessage() {
         return message;
@@ -23,19 +23,19 @@ public class NodeResponse {
         this.message = message;
     }
 
-    public ArrayList<Node> getNodes() {
-        return nodes;
+    public ArrayList<Service> getServices() {
+        return services;
     }
 
-    public void setNodes(ArrayList<Node> nodes) {
-        this.nodes = nodes;
+    public void setServices(ArrayList<Service> services) {
+        this.services = services;
     }
 
     @Override
     public String toString() {
-        return "NodeResponse{" +
+        return "ServiceResponse{" +
                 "message='" + message + '\'' +
-                ", nodes=" + nodes +
+                ", services=" + services +
                 '}';
     }
 }

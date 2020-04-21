@@ -1,6 +1,6 @@
-package com.example.statusapp.modelAPI;
+package com.example.statusapp.API.models;
 
-import com.example.statusapp.db.modelROOM.UserTagEntity;
+import com.example.statusapp.db.model.UserTagEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

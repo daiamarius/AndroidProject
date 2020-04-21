@@ -1,20 +1,16 @@
-package com.example.statusapp.db;
+package com.example.statusapp.mvvc;
 
 import android.app.Application;
-import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.statusapp.db.modelROOM.ServiceEntity;
-import com.example.statusapp.db.modelROOM.ServiceWithTags;
-import com.example.statusapp.db.modelROOM.UserTagEntity;
-import com.example.statusapp.modelAPI.StatusappAPI;
-import com.example.statusapp.modelAPI.Tag;
-import com.example.statusapp.modelAPI.service.Service;
-import com.example.statusapp.modelAPI.service.ServiceResponse;
+import com.example.statusapp.db.StatusappDB;
+import com.example.statusapp.db.model.ServiceWithTags;
+import com.example.statusapp.API.StatusappAPI;
+import com.example.statusapp.API.models.service.ServiceResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,8 +26,10 @@ public class ServiceRepository {
     private static final String BASE_URL = "http://192.168.0.105:5000/api/";
     //SQLite db
     private StatusappDB db;
+    private Application app;
 
     public ServiceRepository(Application app){
+        this.app = app;
         db = StatusappDB.getInstance(app);
     }
 
@@ -55,7 +53,7 @@ public class ServiceRepository {
                 Log.d(TAG, "onResponse: Body" + response.body().toString());
                 if(response.code()==200){
                     if(response.body().getMessage().equals("ok")){
-                        //TODO - DELETE FIRST
+                        db.deleteAllServices();
                         db.insertServices(response.body().getServices());
                         Log.d(TAG, "onResponse: ServiceResponse" + response.body().getServices().toString());
                     }
@@ -68,6 +66,7 @@ public class ServiceRepository {
 
             @Override
             public void onFailure(Call<ServiceResponse> call, Throwable t) {
+                Toast.makeText(app.getApplicationContext(),"Getting data failed. Displaying cached data.",Toast.LENGTH_LONG).show();
                 Log.e(TAG, "onFailure: Failed getting data" + t.getMessage() );
             }
         });

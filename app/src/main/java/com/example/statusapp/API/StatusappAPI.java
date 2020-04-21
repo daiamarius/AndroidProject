@@ -1,7 +1,7 @@
-package com.example.statusapp.modelAPI;
+package com.example.statusapp.API;
 
-import com.example.statusapp.modelAPI.node.NodeResponse;
-import com.example.statusapp.modelAPI.service.ServiceResponse;
+import com.example.statusapp.API.models.node.NodeResponse;
+import com.example.statusapp.API.models.service.ServiceResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

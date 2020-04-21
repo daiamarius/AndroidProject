@@ -1,4 +1,4 @@
-package com.example.statusapp;
+package com.example.statusapp.mvvc;
 
 import android.app.Application;
 
@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.statusapp.db.ServiceRepository;
-import com.example.statusapp.db.modelROOM.ServiceWithTags;
+import com.example.statusapp.db.model.ServiceWithTags;
 import java.util.List;
 
 public class ServiceViewModel extends AndroidViewModel {

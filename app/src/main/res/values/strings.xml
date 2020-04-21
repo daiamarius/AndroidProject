@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StatusApp</string>
+    <string name="nochecks">No Checks</string>
 </resources>

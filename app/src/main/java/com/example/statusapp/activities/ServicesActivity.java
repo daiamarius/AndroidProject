@@ -2,40 +2,30 @@ package com.example.statusapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.statusapp.R;
-import com.example.statusapp.ServiceViewModel;
-import com.example.statusapp.adapters.ServicesAdapter;
-import com.example.statusapp.db.modelROOM.ServiceWithTags;
-import com.example.statusapp.modelAPI.StatusappAPI;
-import com.example.statusapp.modelAPI.service.Service;
-import com.example.statusapp.modelAPI.service.ServiceResponse;
+import com.example.statusapp.mvvc.ServiceViewModel;
+import com.example.statusapp.mvvc.ServicesAdapter;
+import com.example.statusapp.db.model.ServiceWithTags;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServicesActivity extends AppCompatActivity{
 
     private final String TAG = "ServicesActivity";
     private RecyclerView recyclerView;
     private ServiceViewModel serviceViewModel;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +46,17 @@ public class ServicesActivity extends AppCompatActivity{
             @Override
             public void onChanged(List<ServiceWithTags> services) {
                 setupAdapterService(services);
-                Toast.makeText(getApplicationContext(),"on changed",Toast.LENGTH_SHORT).show();
             }
         });
 
+        refreshLayout = findViewById(R.id.swipe_refreshlayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                serviceViewModel.getServicesFromAPIAndStore();
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void setupAdapterService(List<ServiceWithTags> services){

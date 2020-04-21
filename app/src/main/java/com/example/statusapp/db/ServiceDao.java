@@ -9,10 +9,10 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.example.statusapp.db.modelROOM.ServiceEntity;
-import com.example.statusapp.db.modelROOM.ServiceTagCrossRef;
-import com.example.statusapp.db.modelROOM.ServiceWithTags;
-import com.example.statusapp.db.modelROOM.UserTagEntity;
+import com.example.statusapp.db.model.ServiceEntity;
+import com.example.statusapp.db.model.ServiceTagCrossRef;
+import com.example.statusapp.db.model.ServiceWithTags;
+import com.example.statusapp.db.model.UserTagEntity;
 
 import java.util.List;
 
@@ -58,7 +58,14 @@ public interface ServiceDao {
     @Query("DELETE FROM service_tag_join WHERE serviceId = :serviceId")
     void deleteServiceTagCrossRefs(int serviceId);
 
+    @Query("DELETE FROM service")
+    void deleteAllServices();
 
+    @Query("DELETE FROM usertag")
+    void deleteAllUserTags();
+
+    @Query("DELETE FROM service_tag_join")
+    void deleteAllServiceTagCrossRefs();
     /**
      * Update
      */
