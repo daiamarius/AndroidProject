@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MenuActivity">
+    tools:context=".activities.MenuActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:id="@+id/appbar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -16,18 +16,15 @@
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="top"
-            app:title="@string/app_name"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-            
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/app_name"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/background_menu"
+                android:src="@drawable/banner"
                 app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
@@ -37,6 +34,190 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/fadegrey">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@color/fadegrey">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_services"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/circlebackgroundlightblue"
+                            android:src="@drawable/services"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/darkgreen"
+                            android:layout_marginTop="10dp"
+                            android:text="Services"/>
+                        <View
+                            android:layout_height="1dp"
+                            android:layout_width="match_parent"
+                            android:background="@color/fadegrey"
+                            android:layout_margin="10dp">
+                        </View>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/services"
+                            android:textColor="@color/darkgreen"
+                            android:padding="5dp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_nodes"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/circlebackgroundgreen"
+                            android:src="@drawable/nodes"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/darkgreen"
+                            android:layout_marginTop="10dp"
+                            android:text="Nodes"/>
+                        <View
+                            android:layout_height="1dp"
+                            android:layout_width="match_parent"
+                            android:background="@color/fadegrey"
+                            android:layout_margin="10dp">
+                        </View>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nodes"
+                            android:textColor="@color/darkgreen"
+                            android:padding="5dp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:background="@color/fadegrey">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_statistics"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/circlebackgrounddarkblue"
+                            android:src="@drawable/statistics"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/darkgreen"
+                            android:layout_marginTop="10dp"
+                            android:text="Statistics"/>
+                        <View
+                            android:layout_height="1dp"
+                            android:layout_width="match_parent"
+                            android:background="@color/fadegrey"
+                            android:layout_margin="10dp">
+                        </View>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/statistics"
+                            android:textColor="@color/darkgreen"
+                            android:padding="5dp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/button_about"
+                    android:layout_width="160dp"
+                    android:layout_height="190dp"
+                    android:layout_margin="5dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@drawable/circlebackgroundpurple"
+                            android:src="@drawable/info"
+                            android:padding="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@color/darkgreen"
+                            android:layout_marginTop="10dp"
+                            android:text="About"/>
+                        <View
+                            android:layout_height="1dp"
+                            android:layout_width="match_parent"
+                            android:background="@color/fadegrey"
+                            android:layout_margin="10dp">
+                        </View>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about"
+                            android:textColor="@color/darkgreen"
+                            android:padding="5dp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbutton"
@@ -48,6 +229,7 @@
         app:srcCompat="@android:drawable/ic_input_add">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

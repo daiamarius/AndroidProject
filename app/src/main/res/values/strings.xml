@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">StatusApp</string>
     <string name="nochecks">No Checks</string>
+    <string name="services">Track service status</string>
+    <string name="nodes">Track nodes status</string>
+    <string name="statistics">Datacenter status schematics</string>
+    <string name="about">Detailed information about the application</string>
 </resources>
