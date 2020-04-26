@@ -3,11 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fadegrey"
     tools:context=".activities.ServicesActivity">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Services"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/cardview_dark_background"
+        android:gravity="center"/>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey"
+        android:layout_below="@+id/title"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/line">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

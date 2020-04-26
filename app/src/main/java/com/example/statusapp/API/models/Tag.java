@@ -1,6 +1,7 @@
 package com.example.statusapp.API.models;
 
 import com.example.statusapp.db.model.UserTagEntity;
+import com.example.statusapp.db.model.nodes.TechTagEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,5 +40,9 @@ public class Tag {
 
     public UserTagEntity toUserTag(){
         return new UserTagEntity(this.id,this.name);
+    }
+
+    public TechTagEntity toTechTag(){
+        return new TechTagEntity(this.id,this.name);
     }
 }

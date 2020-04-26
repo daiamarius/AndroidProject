@@ -2,6 +2,8 @@ package com.example.statusapp.API.models.node;
 
 import com.example.statusapp.API.models.Healthchecks;
 import com.example.statusapp.API.models.Tag;
+import com.example.statusapp.db.model.ServiceEntity;
+import com.example.statusapp.db.model.nodes.NodeEntity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,10 +11,13 @@ import java.util.ArrayList;
 
 public class Node {
 
-    @SerializedName("healthchecks")
+    @SerializedName("checks")
     @Expose
     private Healthchecks healthchecks;
 
+    @SerializedName("name")
+    @Expose
+    private String name;
 
     @SerializedName("host")
     @Expose
@@ -79,5 +84,10 @@ public class Node {
                 ", registered='" + registered + '\'' +
                 ", tags=" + tags +
                 '}';
+    }
+
+    public NodeEntity toEntity(){
+        return new NodeEntity(this.id,this.name,this.healthchecks.getPassing(),this.healthchecks.getCritical(),
+                this.healthchecks.getWarning(),this.host,this.registered);
     }
 }

@@ -219,17 +219,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingbutton"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_input_add">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "325dce4d2762df3d00f51925e766f1e7",
+    "identityHash": "f7f9c98da92ee1a9e9c6d07b465633e3",
     "entities": [
       {
         "tableName": "service",
@@ -123,12 +123,144 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "node",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nodeId` INTEGER NOT NULL, `name` TEXT, `passing` INTEGER NOT NULL, `failing` INTEGER NOT NULL, `warning` INTEGER NOT NULL, `host` TEXT, `registered` TEXT, PRIMARY KEY(`nodeId`))",
+        "fields": [
+          {
+            "fieldPath": "nodeId",
+            "columnName": "nodeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "passing",
+            "columnName": "passing",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "failing",
+            "columnName": "failing",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "warning",
+            "columnName": "warning",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "host",
+            "columnName": "host",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "registered",
+            "columnName": "registered",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "nodeId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "node_tag_join",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nodeId` INTEGER NOT NULL, `techTagId` INTEGER NOT NULL, PRIMARY KEY(`nodeId`, `techTagId`), FOREIGN KEY(`nodeId`) REFERENCES `node`(`nodeId`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`techTagId`) REFERENCES `techtag`(`techTagId`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "nodeId",
+            "columnName": "nodeId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "techTagId",
+            "columnName": "techTagId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "nodeId",
+            "techTagId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "node",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "nodeId"
+            ],
+            "referencedColumns": [
+              "nodeId"
+            ]
+          },
+          {
+            "table": "techtag",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "techTagId"
+            ],
+            "referencedColumns": [
+              "techTagId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "techtag",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`techTagId` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`techTagId`))",
+        "fields": [
+          {
+            "fieldPath": "techTagId",
+            "columnName": "techTagId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "techTagId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '325dce4d2762df3d00f51925e766f1e7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f7f9c98da92ee1a9e9c6d07b465633e3')"
     ]
   }
 }
