@@ -1,6 +1,8 @@
 package com.example.statusapp.mvvc;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,6 +20,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ServiceRepository {
     private final String TAG = "ServiceRepository";
@@ -44,7 +48,14 @@ public class ServiceRepository {
                 .build();
 
         StatusappAPI api = retrofit.create(StatusappAPI.class);
-        Call<ServiceResponse> call = api.getServices();
+
+        SharedPreferences sp = app.getSharedPreferences("sharedPref",MODE_PRIVATE);
+        String token = sp.getString("token", null);
+
+        Log.d(TAG, "ApiCallAndPutInDB: token"+token);
+
+        //Call<ServiceResponse> call = api.getServices();
+        Call<ServiceResponse> call = api.getServicesWithToken(token);
 
         call.enqueue(new Callback<ServiceResponse>() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.statusapp.mvvc;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class NodeRepository {
     private final String TAG = "NodeRepository";
@@ -45,7 +48,11 @@ public class NodeRepository {
                 .build();
 
         StatusappAPI api = retrofit.create(StatusappAPI.class);
-        Call<NodeResponse> call = api.getNodes();
+
+        SharedPreferences sp = app.getSharedPreferences("sharedPref",MODE_PRIVATE);
+        String token = sp.getString("token", null);
+
+        Call<NodeResponse> call = api.getNodesWithToken(token);
 
         call.enqueue(new Callback<NodeResponse>() {
             @Override

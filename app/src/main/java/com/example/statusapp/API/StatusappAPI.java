@@ -22,6 +22,10 @@ public interface StatusappAPI {
     Call<User> login(@Header("Authorization") String header);
 
     @Headers("Content-Type: application/json")
-    @GET("all")
-    Call<ServiceResponse> getAllWithToken(@Header("x-access-token") String authToken);
+    @GET("services")
+    Call<ServiceResponse> getServicesWithToken(@Header("x-access-token") String authToken);
+
+    @Headers("Content-Type: application/json")
+    @GET("nodes")
+    Call<NodeResponse> getNodesWithToken(@Header("x-access-token") String authToken);
 }
