@@ -92,11 +92,15 @@ public class NodesAdapter extends RecyclerView.Adapter<NodesAdapter.ViewHolder> 
 
             holder.layout_checks.addView(nochecks);
         }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(10,10,10,10);
+
 
         for(TechTagEntity t: tags){
             TextView tv = new TextView(holder.context);
             tv.setText(t.getName());
             tv.setTextSize(20);
+            tv.setLayoutParams(params);
             tv.setGravity(Gravity.RIGHT);
             tv.setBackgroundColor(Color.parseColor("#17a2b8"));
             tv.setPadding(5,5,5,5);

@@ -20,6 +20,7 @@ import com.example.statusapp.db.model.ServiceEntity;
 import com.example.statusapp.db.model.ServiceWithTags;
 import com.example.statusapp.mvvc.ServiceRepository;
 import com.example.statusapp.mvvc.ServiceViewModel;
+import com.example.statusapp.mvvc.StatisticsColumnView;
 import com.example.statusapp.mvvc.StatisticsView;
 import com.example.statusapp.mvvc.StatisticsViewModel;
 
@@ -30,6 +31,7 @@ public class StatisticsActivity extends AppCompatActivity {
     StatisticsViewModel viewModel;
     private SwipeRefreshLayout refreshLayout;
     private StatisticsView statisticsView;
+    private StatisticsColumnView columnView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,9 @@ public class StatisticsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistics);
 
         statisticsView = findViewById(R.id.statistics_view);
+        columnView = findViewById(R.id.column_view);
 
-         viewModel = ViewModelProviders.of(this).get(StatisticsViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(StatisticsViewModel.class);
         if(isNetworkConnected(this)){
             viewModel.getServicesFromAPIAndStore();
         }
@@ -53,6 +56,9 @@ public class StatisticsActivity extends AppCompatActivity {
                 for(ServiceWithTags s : services)
                     entities.add(s.getService());
                 statisticsView.setServices(entities);
+                columnView.setServices(entities);
+                statisticsView.invalidate();
+                columnView.invalidate();
             }
         });
 
@@ -61,9 +67,13 @@ public class StatisticsActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 viewModel.getServicesFromAPIAndStore();
+                statisticsView.invalidate();
+                columnView.invalidate();
                 refreshLayout.setRefreshing(false);
             }
         });
+        statisticsView.invalidate();
+        columnView.invalidate();
     }
 
 

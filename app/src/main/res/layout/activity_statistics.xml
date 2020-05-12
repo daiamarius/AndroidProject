@@ -19,7 +19,15 @@
             android:id="@+id/statistics_view"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <com.example.statusapp.mvvc.StatisticsColumnView
+        android:id="@+id/column_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statistics_refreshlayout"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -32,7 +40,7 @@
         android:padding="20dp"
         android:text="Passing"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statistics_refreshlayout"
+        app:layout_constraintTop_toBottomOf="@+id/column_view"
         app:layout_constraintEnd_toStartOf="@+id/textView6"/>
 
     <TextView
@@ -46,7 +54,7 @@
         android:text="Failing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/statistics_refreshlayout" />
+        app:layout_constraintTop_toBottomOf="@+id/column_view" />
 
     <TextView
         android:id="@+id/textView6"
@@ -59,6 +67,6 @@
         android:padding="20dp"
         android:text="Warning"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/statistics_refreshlayout"
+        app:layout_constraintTop_toBottomOf="@+id/column_view"
         app:layout_constraintEnd_toStartOf="@+id/textView4"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
